@@ -585,148 +585,115 @@ local function YRIEA_fake_script() -- Menu.LocalScript
 	local toggleBtn = script.Parent
 	local menuFrame = toggleBtn.Parent:WaitForChild("menuFrame")
 	local UserInputService = game:GetService("UserInputService")
-	local GuiService = game:GetService("GuiService")
-	
-	-- Screen adaptation function
+	local RunService = game:GetService("RunService")
+
+	local function getCamera()
+		local cam = workspace.CurrentCamera
+		if not cam then
+			cam = workspace:WaitForChild("CurrentCamera")
+		end
+		return cam
+	end
+
+	local camera = getCamera()
+
 	local function adaptToScreen()
-		local screenSize = workspace.CurrentCamera.ViewportSize
+		camera = getCamera()
+		local screenSize = (camera and camera.ViewportSize) or Vector2.new(800, 600)
 		local isMobile = UserInputService.TouchEnabled
-		
+
 		if isMobile then
-			-- Mobile adaptations
-			toggleBtn.Size = UDim2.new(0, math.min(80, screenSize.X * 0.15), 0, math.min(50, screenSize.Y * 0.08))
+			local w = math.clamp(math.floor(screenSize.X * 0.15), 40, 80)
+			local h = math.clamp(math.floor(screenSize.Y * 0.08), 30, 50)
+			toggleBtn.Size = UDim2.new(0, w, 0, h)
 			menuFrame.Size = UDim2.new(0.9, 0, 0.7, 0)
-			
-			-- Position button in corner for mobile
 			toggleBtn.Position = UDim2.new(0, 15, 0, 15)
-			
-			-- Center menu initially
-			menuFrame.Position = UDim2.new(0.5, -menuFrame.AbsoluteSize.X/2, 0.5, -menuFrame.AbsoluteSize.Y/2)
+			menuFrame.Position = UDim2.new(0.5, -menuFrame.AbsoluteSize.X / 2, 0.5, -menuFrame.AbsoluteSize.Y / 2)
 		else
-			-- Desktop adaptations (keep original sizes)
-			if toggleBtn.Size == UDim2.new(0, 116, 0, 49) then
-				-- Keep original desktop size
-			end
-			if menuFrame.Size == UDim2.new(0, 561, 0, 293) then
-				-- Keep original desktop size
-			end
+			toggleBtn.Size = UDim2.new(0, 116, 0, 49)
+			menuFrame.Size = UDim2.new(0, 561, 0, 293)
 		end
-		
-		-- Ensure menu doesn't go off-screen
-		task.wait(0.1) -- Wait for size to update
-		if menuFrame.Position.X.Offset < 0 then
-			menuFrame.Position = UDim2.new(0, 10, menuFrame.Position.Y.Scale, menuFrame.Position.Y.Offset)
-		end
-		if menuFrame.Position.X.Offset > screenSize.X - menuFrame.AbsoluteSize.X then
-			menuFrame.Position = UDim2.new(0, screenSize.X - menuFrame.AbsoluteSize.X - 10, menuFrame.Position.Y.Scale, menuFrame.Position.Y.Offset)
+
+		task.wait(0.05)
+		if menuFrame.AbsoluteSize.X > 0 then
+			local maxX = screenSize.X - menuFrame.AbsoluteSize.X - 10
+			local maxY = screenSize.Y - menuFrame.AbsoluteSize.Y - 10
+			local newX = menuFrame.Position.X.Offset
+			local newY = menuFrame.Position.Y.Offset
+			if newX < 10 then newX = 10 end
+			if newX > maxX then newX = maxX end
+			if newY < 10 then newY = 10 end
+			if newY > maxY then newY = maxY end
+			menuFrame.Position = UDim2.new(0, newX, 0, newY)
 		end
 	end
-	
-	-- Toggle menu visibility (works for both mouse and touch)
+
 	local function onToggle()
 		menuFrame.Visible = not menuFrame.Visible
-		
-		-- Ensure menu is visible on screen when opened
 		if menuFrame.Visible then
-			local screenSize = workspace.CurrentCamera.ViewportSize
-			if menuFrame.Position.X.Offset < 0 then
-				menuFrame.Position = UDim2.new(0, 10, menuFrame.Position.Y.Scale, menuFrame.Position.Y.Offset)
-			end
-			if menuFrame.Position.X.Offset > screenSize.X - menuFrame.AbsoluteSize.X then
-				menuFrame.Position = UDim2.new(0, screenSize.X - menuFrame.AbsoluteSize.X - 10, menuFrame.Position.Y.Scale, menuFrame.Position.Y.Offset)
-			end
+			adaptToScreen()
 		end
 	end
-	
-	toggleBtn.MouseButton1Click:Connect(onToggle)
-	toggleBtn.TouchTap:Connect(onToggle)
-	
-	-- Improved draggable function for mobile
+
+	toggleBtn.Activated:Connect(onToggle)
+
+	local dragging = false
+	local dragStart = nil
+	local startPos = nil
+	local currentInput = nil
+
 	local function makeDraggable(element)
-		local dragging = false
-		local dragStart = nil
-		local startPos = nil
-		local currentTouch = nil
-		
-		-- Handle both mouse and touch input start
 		element.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or 
-			   input.UserInputType == Enum.UserInputType.Touch then
-				
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				dragging = true
 				dragStart = input.Position
 				startPos = element.Position
-				currentTouch = input
-				
-				-- Prevent default touch behavior for better dragging
-				if input.UserInputType == Enum.UserInputType.Touch then
-					GuiService:CaptureFocus(input)
-				end
+				currentInput = input
 			end
 		end)
-		
-		-- Handle input changes for both mouse and touch
+
 		UserInputService.InputChanged:Connect(function(input)
 			if not dragging then return end
-			
-			-- Only process the correct input (same touch or mouse movement)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or 
-			   (input.UserInputType == Enum.UserInputType.Touch and input == currentTouch) then
-				
-				local delta = input.Position - dragStart
-				local newPos = UDim2.new(
-					startPos.X.Scale,
-					startPos.X.Offset + delta.X,
-					startPos.Y.Scale,
-					startPos.Y.Offset + delta.Y
-				)
-				
-				-- Keep element within screen bounds
-				local screenSize = workspace.CurrentCamera.ViewportSize
-				local elementSize = element.AbsoluteSize
-				
-				-- X bounds
-				if newPos.X.Offset < 0 then
-					newPos = UDim2.new(0, 0, newPos.Y.Scale, newPos.Y.Offset)
-				elseif newPos.X.Offset > screenSize.X - elementSize.X then
-					newPos = UDim2.new(0, screenSize.X - elementSize.X, newPos.Y.Scale, newPos.Y.Offset)
-				end
-				
-				-- Y bounds
-				if newPos.Y.Offset < 0 then
-					newPos = UDim2.new(newPos.X.Scale, newPos.X.Offset, 0, 0)
-				elseif newPos.Y.Offset > screenSize.Y - elementSize.Y then
-					newPos = UDim2.new(newPos.X.Scale, newPos.X.Offset, 0, screenSize.Y - elementSize.Y)
-				end
-				
-				element.Position = newPos
-			end
+			if input ~= currentInput and input.UserInputType ~= Enum.UserInputType.MouseMovement then return end
+
+			local delta = input.Position - dragStart
+			local newX = startPos.X.Offset + delta.X
+			local newY = startPos.Y.Offset + delta.Y
+
+			local cam = getCamera()
+			local screenSize = (cam and cam.ViewportSize) or Vector2.new(800, 600)
+			local elementSize = element.AbsoluteSize
+
+			if newX < 0 then newX = 0 end
+			if newX > screenSize.X - elementSize.X then newX = screenSize.X - elementSize.X end
+			if newY < 0 then newY = 0 end
+			if newY > screenSize.Y - elementSize.Y then newY = screenSize.Y - elementSize.Y end
+
+			element.Position = UDim2.new(0, newX, 0, newY)
 		end)
-		
-		-- Handle input end for both mouse and touch
-		UserInputService.InputEnded:Connect(function(input)
-			if input == currentTouch and 
-			   (input.UserInputType == Enum.UserInputType.MouseButton1 or 
-			    input.UserInputType == Enum.UserInputType.Touch) then
-				
+
+		element.InputEnded:Connect(function(input)
+			if input == currentInput then
 				dragging = false
-				currentTouch = nil
-				
-				-- Release focus
-				if input.UserInputType == Enum.UserInputType.Touch then
-					GuiService:ReleaseFocus()
-				end
+				currentInput = nil
 			end
 		end)
 	end
-	
-	-- Initial screen adaptation
+
 	adaptToScreen()
-	
-	-- Re-adapt when screen size changes (device rotation, window resize)
-	UserInputService:GetPropertyChangedSignal("ViewportSize"):Connect(adaptToScreen)
-	
-	-- Make both button and menu draggable
+
+	camera = getCamera()
+	if camera then
+		camera:GetPropertyChangedSignal("ViewportSize"):Connect(adaptToScreen)
+	end
+	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+		camera = getCamera()
+		if camera then
+			camera:GetPropertyChangedSignal("ViewportSize"):Connect(adaptToScreen)
+		end
+		adaptToScreen()
+	end)
+
 	makeDraggable(toggleBtn)
 	makeDraggable(menuFrame)
 end
