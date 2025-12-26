@@ -1,675 +1,219 @@
--- Gui to Lua
--- Version: 3.2
+-- GUI TO LUA FIXED FOR MOBILE
+-- Version Mobile 3.2 FIX
 
--- Instances:
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
 
+-- =========================
+-- SCREEN GUI
+-- =========================
 local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+-- =========================
+-- MENU BUTTON
+-- =========================
 local Menu = Instance.new("TextButton")
-local menuFrame = Instance.new("Frame")
-local Frame = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local ImageLabel = Instance.new("ImageLabel")
-local TextLabel = Instance.new("TextLabel")
-local UICorner_2 = Instance.new("UICorner")
-local opciones = Instance.new("ScrollingFrame")
-local principal = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local rentados = Instance.new("TextButton")
-local UICorner_4 = Instance.new("UICorner")
-local premium = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local gratis = Instance.new("TextButton")
-local UICorner_6 = Instance.new("UICorner")
-local script = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local configuracion = Instance.new("TextButton")
-local UICorner_8 = Instance.new("UICorner")
-local UIListLayout = Instance.new("UIListLayout")
-local principal_2 = Instance.new("Frame")
-local rentados_2 = Instance.new("Frame")
-local ScrollingFrame = Instance.new("ScrollingFrame")
-local TextButton = Instance.new("TextButton")
-local UICorner_9 = Instance.new("UICorner")
-local TextButton_2 = Instance.new("TextButton")
-local UICorner_10 = Instance.new("UICorner")
-local TextButton_3 = Instance.new("TextButton")
-local UICorner_11 = Instance.new("UICorner")
-local TextButton_4 = Instance.new("TextButton")
-local UICorner_12 = Instance.new("UICorner")
-local UIGridLayout1 = Instance.new("UIGridLayout")
-local premium_2 = Instance.new("Frame")
-local TextBox = Instance.new("TextBox")
-local TextButton_5 = Instance.new("TextButton")
-local ScrollingFrame_2 = Instance.new("ScrollingFrame")
-local TextButton_6 = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
-local TextButton_7 = Instance.new("TextButton")
-local UICorner_14 = Instance.new("UICorner")
-local TextButton_8 = Instance.new("TextButton")
-local UICorner_15 = Instance.new("UICorner")
-local TextButton_9 = Instance.new("TextButton")
-local UICorner_16 = Instance.new("UICorner")
-local UIGridLayout1_2 = Instance.new("UIGridLayout")
-local gratis_2 = Instance.new("Frame")
-local ScrollingFrame_3 = Instance.new("ScrollingFrame")
-local TextButton_10 = Instance.new("TextButton")
-local UICorner_17 = Instance.new("UICorner")
-local TextButton_11 = Instance.new("TextButton")
-local UICorner_18 = Instance.new("UICorner")
-local TextButton_12 = Instance.new("TextButton")
-local UICorner_19 = Instance.new("UICorner")
-local TextButton_13 = Instance.new("TextButton")
-local UICorner_20 = Instance.new("UICorner")
-local UIGridLayout1_3 = Instance.new("UIGridLayout")
-local TextBox_2 = Instance.new("TextBox")
-local TextButton_14 = Instance.new("TextButton")
-local script_2 = Instance.new("Frame")
-local ScrollingFrame_4 = Instance.new("ScrollingFrame")
-local TextButton_15 = Instance.new("TextButton")
-local UICorner_21 = Instance.new("UICorner")
-local TextButton_16 = Instance.new("TextButton")
-local UICorner_22 = Instance.new("UICorner")
-local TextButton_17 = Instance.new("TextButton")
-local UICorner_23 = Instance.new("UICorner")
-local TextButton_18 = Instance.new("TextButton")
-local UICorner_24 = Instance.new("UICorner")
-local UIGridLayout1_4 = Instance.new("UIGridLayout")
-local configuracion_2 = Instance.new("Frame")
-
---Properties:
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-Menu.Name = "Menu"
 Menu.Parent = ScreenGui
-Menu.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Menu.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Menu.BorderSizePixel = 0
-Menu.Position = UDim2.new(0, 0, 0.187106922, 0)
-Menu.Size = UDim2.new(0, 116, 0, 49)
-Menu.Font = Enum.Font.SourceSans
 Menu.Text = "MENU"
-Menu.TextColor3 = Color3.fromRGB(255, 255, 255)
-Menu.TextSize = 14.000
+Menu.TextScaled = true
+Menu.BackgroundColor3 = Color3.fromRGB(0,0,0)
+Menu.TextColor3 = Color3.fromRGB(255,255,255)
+Menu.Size = UDim2.new(0.25,0,0.07,0)
+Menu.Position = UDim2.new(0.02,0,0.15,0)
 
-menuFrame.Name = "menuFrame"
+local MenuCorner = Instance.new("UICorner", Menu)
+
+-- =========================
+-- MAIN FRAME
+-- =========================
+local menuFrame = Instance.new("Frame")
 menuFrame.Parent = ScreenGui
-menuFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-menuFrame.BackgroundTransparency = 0.350
-menuFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-menuFrame.BorderSizePixel = 0
-menuFrame.Position = UDim2.new(0.358230501, 0, 0.294025153, 0)
-menuFrame.Size = UDim2.new(0, 561, 0, 293)
+menuFrame.Visible = false
+menuFrame.BackgroundColor3 = Color3.fromRGB(0,0,0)
+menuFrame.BackgroundTransparency = 0.25
+menuFrame.Size = UDim2.new(0.9,0,0.6,0)
+menuFrame.Position = UDim2.new(0.05,0,0.2,0)
 
-Frame.Parent = menuFrame
-Frame.BackgroundColor3 = Color3.fromRGB(184, 159, 17)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Size = UDim2.new(0, 561, 0, 31)
+local FrameCorner = Instance.new("UICorner", menuFrame)
 
-UICorner.Parent = Frame
+-- SCALE FOR MOBILE
+local UIScale = Instance.new("UIScale", menuFrame)
+UIScale.Scale = UserInputService.TouchEnabled and 0.85 or 1
 
-ImageLabel.Parent = Frame
-ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.0285204984, 0, 0.0967741907, 0)
-ImageLabel.Size = UDim2.new(0, 37, 0, 25)
-ImageLabel.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+-- =========================
+-- TOP BAR
+-- =========================
+local TopBar = Instance.new("Frame")
+TopBar.Parent = menuFrame
+TopBar.Size = UDim2.new(1,0,0.1,0)
+TopBar.BackgroundColor3 = Color3.fromRGB(184,159,17)
 
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.122994654, 0, 0.0967741907, 0)
-TextLabel.Size = UDim2.new(0, 97, 0, 25)
-TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.Text = "UNIVERSAL"
-TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14.000
-TextLabel.TextWrapped = true
+local TopCorner = Instance.new("UICorner", TopBar)
 
-UICorner_2.Parent = menuFrame
+local Title = Instance.new("TextLabel")
+Title.Parent = TopBar
+Title.Text = "UNIVERSAL"
+Title.TextScaled = true
+Title.BackgroundTransparency = 1
+Title.Size = UDim2.new(0.6,0,1,0)
+Title.Position = UDim2.new(0.2,0,0,0)
+Title.TextColor3 = Color3.fromRGB(0,0,0)
 
-opciones.Name = "opciones"
+-- =========================
+-- SIDEBAR
+-- =========================
+local opciones = Instance.new("ScrollingFrame")
 opciones.Parent = menuFrame
-opciones.Active = true
-opciones.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-opciones.BackgroundTransparency = 1.000
-opciones.BorderColor3 = Color3.fromRGB(0, 0, 0)
-opciones.BorderSizePixel = 0
-opciones.Position = UDim2.new(0, 0, 0.105802044, 0)
-opciones.Size = UDim2.new(0, 100, 0, 262)
-opciones.CanvasSize = UDim2.new(0, 0, 1, 0)
-opciones.ScrollBarThickness = 7
-
-principal.Name = "principal"
-principal.Parent = opciones
-principal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-principal.BorderColor3 = Color3.fromRGB(0, 0, 0)
-principal.BorderSizePixel = 0
-principal.Position = UDim2.new(0.109999999, 0, 0.0204778165, 0)
-principal.Size = UDim2.new(0, 68, 0, 31)
-principal.Font = Enum.Font.SourceSans
-principal.Text = "PRINCIPAL"
-principal.TextColor3 = Color3.fromRGB(0, 0, 0)
-principal.TextSize = 14.000
-
-UICorner_3.Parent = principal
-
-rentados.Name = "rentados"
-rentados.Parent = opciones
-rentados.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-rentados.BorderColor3 = Color3.fromRGB(0, 0, 0)
-rentados.BorderSizePixel = 0
-rentados.Position = UDim2.new(0.109999999, 0, 0.0955631435, 0)
-rentados.Size = UDim2.new(0, 68, 0, 31)
-rentados.Font = Enum.Font.SourceSans
-rentados.Text = "RENTADOS"
-rentados.TextColor3 = Color3.fromRGB(0, 0, 0)
-rentados.TextSize = 14.000
-
-UICorner_4.Parent = rentados
-
-premium.Name = "premium"
-premium.Parent = opciones
-premium.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-premium.BorderColor3 = Color3.fromRGB(0, 0, 0)
-premium.BorderSizePixel = 0
-premium.Position = UDim2.new(0.109999999, 0, 0.313993186, 0)
-premium.Size = UDim2.new(0, 68, 0, 31)
-premium.Font = Enum.Font.SourceSans
-premium.Text = "PREMIUM"
-premium.TextColor3 = Color3.fromRGB(0, 0, 0)
-premium.TextSize = 14.000
-
-UICorner_5.Parent = premium
-
-gratis.Name = "gratis"
-gratis.Parent = opciones
-gratis.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-gratis.BorderColor3 = Color3.fromRGB(0, 0, 0)
-gratis.BorderSizePixel = 0
-gratis.Position = UDim2.new(0.109999999, 0, 0.380546063, 0)
-gratis.Size = UDim2.new(0, 68, 0, 31)
-gratis.Font = Enum.Font.SourceSans
-gratis.Text = "FREE"
-gratis.TextColor3 = Color3.fromRGB(0, 0, 0)
-gratis.TextSize = 14.000
-
-UICorner_6.Parent = gratis
-
-script.Name = "script"
-script.Parent = opciones
-script.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-script.BorderColor3 = Color3.fromRGB(0, 0, 0)
-script.BorderSizePixel = 0
-script.Position = UDim2.new(0.109999999, 0, 0.170648471, 0)
-script.Size = UDim2.new(0, 68, 0, 31)
-script.Font = Enum.Font.SourceSans
-script.Text = "script"
-script.TextColor3 = Color3.fromRGB(0, 0, 0)
-script.TextSize = 14.000
-
-UICorner_7.Parent = script
-
-configuracion.Name = "configuracion"
-configuracion.Parent = opciones
-configuracion.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-configuracion.BorderColor3 = Color3.fromRGB(0, 0, 0)
-configuracion.BorderSizePixel = 0
-configuracion.Position = UDim2.new(0.109999999, 0, 0.244027302, 0)
-configuracion.Size = UDim2.new(0, 68, 0, 31)
-configuracion.Font = Enum.Font.SourceSans
-configuracion.Text = "CONF"
-configuracion.TextColor3 = Color3.fromRGB(0, 0, 0)
-configuracion.TextSize = 14.000
-
-UICorner_8.Parent = configuracion
-
-UIListLayout.Parent = opciones
-UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-UIListLayout.Padding = UDim.new(0, 15)
-
-principal_2.Name = "principal"
-principal_2.Parent = menuFrame
-principal_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-principal_2.BackgroundTransparency = 1.000
-principal_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-principal_2.BorderSizePixel = 0
-principal_2.Position = UDim2.new(0.192513689, 0, 0.1331058, 0)
-principal_2.Size = UDim2.new(0, 445, 0, 245)
-
-rentados_2.Name = "rentados"
-rentados_2.Parent = menuFrame
-rentados_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-rentados_2.BackgroundTransparency = 1.000
-rentados_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-rentados_2.BorderSizePixel = 0
-rentados_2.Position = UDim2.new(0.192513689, 0, 0.1331058, 0)
-rentados_2.Size = UDim2.new(0, 445, 0, 245)
-rentados_2.Visible = false
-
-ScrollingFrame.Parent = rentados_2
-ScrollingFrame.Active = true
-ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollingFrame.BackgroundTransparency = 1.000
-ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScrollingFrame.BorderSizePixel = 0
-ScrollingFrame.Position = UDim2.new(0, 0, 0.0326530598, 0)
-ScrollingFrame.Size = UDim2.new(0, 444, 0, 236)
-
-TextButton.Parent = ScrollingFrame
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Size = UDim2.new(0, 120, 0, 40)
-TextButton.Font = Enum.Font.SourceSans
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextSize = 14.000
-
-UICorner_9.Parent = TextButton
-
-TextButton_2.Parent = ScrollingFrame
-TextButton_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_2.BorderSizePixel = 0
-TextButton_2.Size = UDim2.new(0, 120, 0, 40)
-TextButton_2.Font = Enum.Font.SourceSans
-TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_2.TextSize = 14.000
-
-UICorner_10.Parent = TextButton_2
-
-TextButton_3.Parent = ScrollingFrame
-TextButton_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_3.BorderSizePixel = 0
-TextButton_3.Position = UDim2.new(0.729729712, 0, -0.0163265299, 0)
-TextButton_3.Size = UDim2.new(0, 120, 0, 40)
-TextButton_3.Font = Enum.Font.SourceSans
-TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_3.TextSize = 14.000
-
-UICorner_11.Parent = TextButton_3
-
-TextButton_4.Parent = ScrollingFrame
-TextButton_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_4.BorderSizePixel = 0
-TextButton_4.Size = UDim2.new(0, 120, 0, 40)
-TextButton_4.Font = Enum.Font.SourceSans
-TextButton_4.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_4.TextSize = 14.000
-
-UICorner_12.Parent = TextButton_4
-
-UIGridLayout1.Name = "UIGridLayout1"
-UIGridLayout1.Parent = ScrollingFrame
-UIGridLayout1.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayout1.CellSize = UDim2.new(0, 100, 0, 40)
-
-premium_2.Name = "premium"
-premium_2.Parent = menuFrame
-premium_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-premium_2.BackgroundTransparency = 1.000
-premium_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-premium_2.BorderSizePixel = 0
-premium_2.Position = UDim2.new(0.192513689, 0, 0.1331058, 0)
-premium_2.Size = UDim2.new(0, 445, 0, 245)
-premium_2.Visible = false
-
-TextBox.Parent = premium_2
-TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextBox.BorderSizePixel = 0
-TextBox.Size = UDim2.new(0, 332, 0, 23)
-TextBox.Font = Enum.Font.SourceSans
-TextBox.Text = ""
-TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextBox.TextScaled = true
-TextBox.TextSize = 14.000
-TextBox.TextWrapped = true
-
-TextButton_5.Parent = premium_2
-TextButton_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_5.BorderSizePixel = 0
-TextButton_5.Position = UDim2.new(0.746067405, 0, 0, 0)
-TextButton_5.Size = UDim2.new(0, 112, 0, 23)
-TextButton_5.Font = Enum.Font.SourceSans
-TextButton_5.Text = "BUSCAR"
-TextButton_5.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_5.TextSize = 14.000
-
-ScrollingFrame_2.Parent = premium_2
-ScrollingFrame_2.Active = true
-ScrollingFrame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollingFrame_2.BackgroundTransparency = 1.000
-ScrollingFrame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScrollingFrame_2.BorderSizePixel = 0
-ScrollingFrame_2.Position = UDim2.new(0, 0, 0.126530617, 0)
-ScrollingFrame_2.Size = UDim2.new(0, 444, 0, 214)
-
-TextButton_6.Parent = ScrollingFrame_2
-TextButton_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_6.BorderSizePixel = 0
-TextButton_6.Size = UDim2.new(0, 120, 0, 40)
-TextButton_6.Font = Enum.Font.SourceSans
-TextButton_6.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_6.TextSize = 14.000
-
-UICorner_13.Parent = TextButton_6
-
-TextButton_7.Parent = ScrollingFrame_2
-TextButton_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_7.BorderSizePixel = 0
-TextButton_7.Size = UDim2.new(0, 120, 0, 40)
-TextButton_7.Font = Enum.Font.SourceSans
-TextButton_7.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_7.TextSize = 14.000
-
-UICorner_14.Parent = TextButton_7
-
-TextButton_8.Parent = ScrollingFrame_2
-TextButton_8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_8.BorderSizePixel = 0
-TextButton_8.Position = UDim2.new(0.729729712, 0, -0.0163265299, 0)
-TextButton_8.Size = UDim2.new(0, 120, 0, 40)
-TextButton_8.Font = Enum.Font.SourceSans
-TextButton_8.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_8.TextSize = 14.000
-
-UICorner_15.Parent = TextButton_8
-
-TextButton_9.Parent = ScrollingFrame_2
-TextButton_9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_9.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_9.BorderSizePixel = 0
-TextButton_9.Size = UDim2.new(0, 120, 0, 40)
-TextButton_9.Font = Enum.Font.SourceSans
-TextButton_9.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_9.TextSize = 14.000
-
-UICorner_16.Parent = TextButton_9
-
-UIGridLayout1_2.Name = "UIGridLayout1"
-UIGridLayout1_2.Parent = ScrollingFrame_2
-UIGridLayout1_2.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayout1_2.CellSize = UDim2.new(0, 100, 0, 40)
-
-gratis_2.Name = "gratis"
-gratis_2.Parent = menuFrame
-gratis_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-gratis_2.BackgroundTransparency = 1.000
-gratis_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-gratis_2.BorderSizePixel = 0
-gratis_2.Position = UDim2.new(0.192513689, 0, 0.1331058, 0)
-gratis_2.Size = UDim2.new(0, 445, 0, 245)
-gratis_2.Visible = false
-
-ScrollingFrame_3.Parent = gratis_2
-ScrollingFrame_3.Active = true
-ScrollingFrame_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollingFrame_3.BackgroundTransparency = 1.000
-ScrollingFrame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScrollingFrame_3.BorderSizePixel = 0
-ScrollingFrame_3.Position = UDim2.new(0, 0, 0.126530617, 0)
-ScrollingFrame_3.Size = UDim2.new(0, 444, 0, 214)
-
-TextButton_10.Parent = ScrollingFrame_3
-TextButton_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_10.BorderSizePixel = 0
-TextButton_10.Size = UDim2.new(0, 120, 0, 40)
-TextButton_10.Font = Enum.Font.SourceSans
-TextButton_10.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_10.TextSize = 14.000
-
-UICorner_17.Parent = TextButton_10
-
-TextButton_11.Parent = ScrollingFrame_3
-TextButton_11.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_11.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_11.BorderSizePixel = 0
-TextButton_11.Size = UDim2.new(0, 120, 0, 40)
-TextButton_11.Font = Enum.Font.SourceSans
-TextButton_11.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_11.TextSize = 14.000
-
-UICorner_18.Parent = TextButton_11
-
-TextButton_12.Parent = ScrollingFrame_3
-TextButton_12.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_12.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_12.BorderSizePixel = 0
-TextButton_12.Position = UDim2.new(0.729729712, 0, -0.0163265299, 0)
-TextButton_12.Size = UDim2.new(0, 120, 0, 40)
-TextButton_12.Font = Enum.Font.SourceSans
-TextButton_12.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_12.TextSize = 14.000
-
-UICorner_19.Parent = TextButton_12
-
-TextButton_13.Parent = ScrollingFrame_3
-TextButton_13.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_13.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_13.BorderSizePixel = 0
-TextButton_13.Size = UDim2.new(0, 120, 0, 40)
-TextButton_13.Font = Enum.Font.SourceSans
-TextButton_13.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_13.TextSize = 14.000
-
-UICorner_20.Parent = TextButton_13
-
-UIGridLayout1_3.Name = "UIGridLayout1"
-UIGridLayout1_3.Parent = ScrollingFrame_3
-UIGridLayout1_3.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayout1_3.CellSize = UDim2.new(0, 100, 0, 40)
-
-TextBox_2.Parent = gratis_2
-TextBox_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextBox_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextBox_2.BorderSizePixel = 0
-TextBox_2.Size = UDim2.new(0, 332, 0, 23)
-TextBox_2.Font = Enum.Font.SourceSans
-TextBox_2.Text = ""
-TextBox_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextBox_2.TextScaled = true
-TextBox_2.TextSize = 14.000
-TextBox_2.TextWrapped = true
-
-TextButton_14.Parent = gratis_2
-TextButton_14.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_14.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_14.BorderSizePixel = 0
-TextButton_14.Position = UDim2.new(0.746067405, 0, 0, 0)
-TextButton_14.Size = UDim2.new(0, 112, 0, 23)
-TextButton_14.Font = Enum.Font.SourceSans
-TextButton_14.Text = "BUSCAR"
-TextButton_14.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_14.TextSize = 14.000
-
-script_2.Name = "script"
-script_2.Parent = menuFrame
-script_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-script_2.BackgroundTransparency = 1.000
-script_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-script_2.BorderSizePixel = 0
-script_2.Position = UDim2.new(0.192513689, 0, 0.1331058, 0)
-script_2.Size = UDim2.new(0, 445, 0, 245)
-script_2.Visible = false
-
-ScrollingFrame_4.Parent = script_2
-ScrollingFrame_4.Active = true
-ScrollingFrame_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollingFrame_4.BackgroundTransparency = 1.000
-ScrollingFrame_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScrollingFrame_4.BorderSizePixel = 0
-ScrollingFrame_4.Position = UDim2.new(0, 0, 0.0326530598, 0)
-ScrollingFrame_4.Size = UDim2.new(0, 444, 0, 236)
-
-TextButton_15.Parent = ScrollingFrame_4
-TextButton_15.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_15.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_15.BorderSizePixel = 0
-TextButton_15.Size = UDim2.new(0, 120, 0, 40)
-TextButton_15.Font = Enum.Font.SourceSans
-TextButton_15.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_15.TextSize = 14.000
-
-UICorner_21.Parent = TextButton_15
-
-TextButton_16.Parent = ScrollingFrame_4
-TextButton_16.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_16.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_16.BorderSizePixel = 0
-TextButton_16.Size = UDim2.new(0, 120, 0, 40)
-TextButton_16.Font = Enum.Font.SourceSans
-TextButton_16.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_16.TextSize = 14.000
-
-UICorner_22.Parent = TextButton_16
-
-TextButton_17.Parent = ScrollingFrame_4
-TextButton_17.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_17.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_17.BorderSizePixel = 0
-TextButton_17.Position = UDim2.new(0.729729712, 0, -0.0163265299, 0)
-TextButton_17.Size = UDim2.new(0, 120, 0, 40)
-TextButton_17.Font = Enum.Font.SourceSans
-TextButton_17.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_17.TextSize = 14.000
-
-UICorner_23.Parent = TextButton_17
-
-TextButton_18.Parent = ScrollingFrame_4
-TextButton_18.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_18.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_18.BorderSizePixel = 0
-TextButton_18.Size = UDim2.new(0, 120, 0, 40)
-TextButton_18.Font = Enum.Font.SourceSans
-TextButton_18.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_18.TextSize = 14.000
-
-UICorner_24.Parent = TextButton_18
-
-UIGridLayout1_4.Name = "UIGridLayout1"
-UIGridLayout1_4.Parent = ScrollingFrame_4
-UIGridLayout1_4.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayout1_4.CellSize = UDim2.new(0, 100, 0, 40)
-
-configuracion_2.Name = "configuracion"
-configuracion_2.Parent = menuFrame
-configuracion_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-configuracion_2.BackgroundTransparency = 1.000
-configuracion_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-configuracion_2.BorderSizePixel = 0
-configuracion_2.Position = UDim2.new(0.192513689, 0, 0.1331058, 0)
-configuracion_2.Size = UDim2.new(0, 445, 0, 245)
-configuracion_2.Visible = false
-
--- Scripts:
-
-local function YRIEA_fake_script() -- Menu.LocalScript 
-	local script = Instance.new('LocalScript', Menu)
-
-	local toggleBtn = script.Parent
-	local menuFrame = toggleBtn.Parent:WaitForChild("menuFrame")
-	local UserInputService = game:GetService("UserInputService")
-	
-	-- Toggle menu visibility
-	toggleBtn.MouseButton1Click:Connect(function()
-		menuFrame.Visible = not menuFrame.Visible
-	end)
-	
-	-- Make elements draggable
-	local function makeDraggable(element)
-		local dragging = false
-		local dragStart = nil
-		local startPos = nil
-		
-		element.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
-				dragging = true
-				dragStart = input.Position
-				startPos = element.Position
-			end
-		end)
-		
-		UserInputService.InputChanged:Connect(function(input)
-			if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-				local delta = input.Position - dragStart
-				element.Position = UDim2.new(
-					startPos.X.Scale,
-					startPos.X.Offset + delta.X,
-					startPos.Y.Scale,
-					startPos.Y.Offset + delta.Y
-				)
-			end
-		end)
-		
-		UserInputService.InputEnded:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
-				dragging = false
-			end
-		end)
-	end
-	
-	-- Make both button and menu draggable
-	makeDraggable(toggleBtn)
-	makeDraggable(menuFrame)
+opciones.Size = UDim2.new(0.25,0,0.9,0)
+opciones.Position = UDim2.new(0,0,0.1,0)
+opciones.CanvasSize = UDim2.new(0,0,0,0)
+opciones.AutomaticCanvasSize = Enum.AutomaticSize.Y
+opciones.ScrollBarThickness = 8
+opciones.BackgroundTransparency = 1
+
+local layout = Instance.new("UIListLayout", opciones)
+layout.Padding = UDim.new(0,12)
+layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+-- =========================
+-- CONTENT FRAMES
+-- =========================
+local contentHolder = Instance.new("Frame")
+contentHolder.Parent = menuFrame
+contentHolder.Size = UDim2.new(0.75,0,0.9,0)
+contentHolder.Position = UDim2.new(0.25,0,0.1,0)
+contentHolder.BackgroundTransparency = 1
+
+local pages = {}
+
+local function createPage(name)
+	local f = Instance.new("Frame")
+	f.Name = name
+	f.Parent = contentHolder
+	f.Size = UDim2.new(1,0,1,0)
+	f.Visible = false
+	f.BackgroundTransparency = 1
+
+	local scroll = Instance.new("ScrollingFrame", f)
+	scroll.Size = UDim2.new(1,0,1,0)
+	scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	scroll.CanvasSize = UDim2.new(0,0,0,0)
+	scroll.ScrollBarThickness = 8
+	scroll.BackgroundTransparency = 1
+
+	local grid = Instance.new("UIGridLayout", scroll)
+	grid.CellSize = UDim2.new(0.45,0,0,45)
+	grid.CellPadding = UDim2.new(0.05,0,0,10)
+
+	pages[name] = f
+	return f, scroll
 end
-coroutine.wrap(YRIEA_fake_script)()
-local function AWZUQE_fake_script() -- opciones.FrameSwitchScript 
-	local script = Instance.new('LocalScript', opciones)
 
-	local screenGui = script.Parent.Parent
-	local opcionesFrame = screenGui.opciones
-	local frames = {screenGui.principal, screenGui.rentados, screenGui.premium, screenGui.gratis, screenGui.script, screenGui.configuracion}
-	
-	for _, frame in ipairs(frames) do
-	    frame.Visible = false
-	end
-	
-	opcionesFrame.principal.MouseButton1Click:Connect(function()
-	    for _, frame in ipairs(frames) do frame.Visible = false end
-	    screenGui.principal.Visible = true
+local principal, pScroll = createPage("principal")
+local rentados, rScroll = createPage("rentados")
+local premium, prScroll = createPage("premium")
+local gratis, gScroll = createPage("gratis")
+local scriptPage, sScroll = createPage("script")
+local config, cScroll = createPage("configuracion")
+
+principal.Visible = true
+
+-- =========================
+-- BUTTON CREATOR
+-- =========================
+local function createSideButton(text, pageName)
+	local btn = Instance.new("TextButton")
+	btn.Parent = opciones
+	btn.Text = text
+	btn.TextScaled = true
+	btn.Size = UDim2.new(1,-10,0,45)
+	btn.BackgroundColor3 = Color3.fromRGB(255,255,255)
+	btn.TextColor3 = Color3.fromRGB(0,0,0)
+
+	local c = Instance.new("UICorner", btn)
+
+	btn.MouseButton1Click:Connect(function()
+		for _,p in pairs(pages) do
+			p.Visible = false
+		end
+		pages[pageName].Visible = true
 	end)
-	
-	opcionesFrame.rentados.MouseButton1Click:Connect(function()
-	    for _, frame in ipairs(frames) do frame.Visible = false end
-	    screenGui.rentados.Visible = true
-	end)
-	
-	opcionesFrame.premium.MouseButton1Click:Connect(function()
-	    for _, frame in ipairs(frames) do frame.Visible = false end
-	    screenGui.premium.Visible = true
-	end)
-	
-	opcionesFrame.gratis.MouseButton1Click:Connect(function()
-	    for _, frame in ipairs(frames) do frame.Visible = false end
-	    screenGui.gratis.Visible = true
-	end)
-	
-	opcionesFrame.script.MouseButton1Click:Connect(function()
-	    for _, frame in ipairs(frames) do frame.Visible = false end
-	    screenGui.script.Visible = true
-	end)
-	
-	opcionesFrame.configuracion.MouseButton1Click:Connect(function()
-	    for _, frame in ipairs(frames) do frame.Visible = false end
-	    screenGui.configuracion.Visible = true
-	end)
-	
-	screenGui.principal.Visible = true
 end
-coroutine.wrap(AWZUQE_fake_script)()
+
+createSideButton("PRINCIPAL","principal")
+createSideButton("RENTADOS","rentados")
+createSideButton("PREMIUM","premium")
+createSideButton("FREE","gratis")
+createSideButton("SCRIPT","script")
+createSideButton("CONF","configuracion")
+
+-- =========================
+-- SAMPLE CONTENT BUTTONS
+-- =========================
+local function addButton(scroll, text)
+	local b = Instance.new("TextButton")
+	b.Parent = scroll
+	b.Text = text
+	b.TextScaled = true
+	b.BackgroundColor3 = Color3.fromRGB(255,255,255)
+	b.TextColor3 = Color3.fromRGB(0,0,0)
+	local c = Instance.new("UICorner", b)
+end
+
+for i=1,8 do
+	addButton(pScroll,"BOTON "..i)
+	addButton(rScroll,"RENTADO "..i)
+	addButton(prScroll,"PREMIUM "..i)
+	addButton(gScroll,"FREE "..i)
+	addButton(sScroll,"SCRIPT "..i)
+end
+
+-- =========================
+-- MENU TOGGLE
+-- =========================
+Menu.MouseButton1Click:Connect(function()
+	menuFrame.Visible = not menuFrame.Visible
+end)
+
+-- =========================
+-- DRAG (PC + MOBILE)
+-- =========================
+local function makeDraggable(frame)
+	local dragging = false
+	local dragStart, startPos
+
+	frame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1
+		or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement
+		or input.UserInputType == Enum.UserInputType.Touch) then
+			local delta = input.Position - dragStart
+			frame.Position = UDim2.new(
+				startPos.X.Scale,
+				startPos.X.Offset + delta.X,
+				startPos.Y.Scale,
+				startPos.Y.Offset + delta.Y
+			)
+		end
+	end)
+
+	UserInputService.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1
+		or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = false
+		end
+	end)
+end
+
+makeDraggable(Menu)
+makeDraggable(menuFrame)
